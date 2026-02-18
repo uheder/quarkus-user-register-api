@@ -11,20 +11,24 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name= "users")
 @NamedQueries({
-        @NamedQuery(
-                name = "User.findByEmail",
-                query = "SELECT u FROM User WHERE u.email = :email"
-        ),
-        @NamedQuery(
-                name = "User.findActive",
-                query = "SELECT u FROM User WHERE u.active = :ativo ORDER BY u.name"
-        ),
-        @NamedQuery(
-                name = "User.findByNameContaining",
-                query = "SELECT u FROM User WHERE LOWER(u.nome) LIKE LOWER(CONCAT('%', :name, '%'))  AND u.active = :active"
-        )
-}
-)
+    @NamedQuery(
+            name = "User.findByEmail",
+            query = "SELECT u FROM User WHERE u.email = :email"
+    ),
+    @NamedQuery(
+            name = "User.findActive",
+            query = "SELECT u FROM User WHERE u.active = true ORDER BY u.name"
+    ),
+    @NamedQuery(
+            name = "User.findByNameContaining",
+            query = "SELECT u FROM User WHERE LOWER(u.nome) LIKE LOWER(CONCAT('%', :name, '%'))  AND u.active = :active"
+    ),
+    @NamedQuery(
+            name = "User.findAll",
+            query = "SELECT u FROM User ORDER BY u.name"
+    ),
+})
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
