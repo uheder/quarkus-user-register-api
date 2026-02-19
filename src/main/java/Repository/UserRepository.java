@@ -61,4 +61,10 @@ public class UserRepository {
         TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
         return query.getResultList();
     }
+
+    public boolean existsByEmail(String email){
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User WHERE u.email = :email", Long.class);
+        query.setParameter("email", email);
+        return query.getSingleResult() > 0;
+    }
 }
